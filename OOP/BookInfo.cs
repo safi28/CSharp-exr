@@ -78,10 +78,12 @@ namespace Book
             Book firstBook = new Book("UNIBIT", "Ivan", "Edu", 23.00m);
             Book secondBook = new Book("UNI", "Mariq", "Moodle", 28.00m);
             BookInfo info = new BookInfo();
+           
             info.ShowBookInfo(firstBook);
             info.ShowBookInfo(secondBook);
             firstBook.Price = 0.00m;
             secondBook.Price -= -11.00m;
+           
             info.ShowBookInfo(firstBook);
             info.ShowBookInfo(secondBook);
         }
