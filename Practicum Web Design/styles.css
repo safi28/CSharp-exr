@@ -1,0 +1,28 @@
+.container{
+    position: relative;
+    font-family: Arial;
+}
+.text-block {
+  position: absolute;
+  right: 9px;
+  left: 10px;
+  bottom: 5px;
+  background-color: black;
+  color: white;
+  /* padding-left: 10px;
+  padding-right: 10px; */
+}
+* {
+  margin: 0;
+}
+.container,
+canvas {
+  text-align: center;
+  color: white;
+  background: #000;
+  height: 100%;
+  width: 100%;
+  background-image: url("https://dl.dropbox.com/s/0e9y6fafbw5lv1t/image.jpg?dl=0");
+  background-size: cover;
+}
+
