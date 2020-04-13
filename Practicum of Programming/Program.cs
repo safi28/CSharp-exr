@@ -12,12 +12,13 @@ namespace PP
         {
 
             string[] data = Console.ReadLine().Split(", ").ToArray();
+
             List<string> list = new List<string>();
             List<int> tables = new List<int>();
-            List<string> order = new List<string>();
+
             double totalPrice = 0;
-            int counter = 0;
             int tableCounter = 0;
+            int countOrders = 0;
 
             double priceSalad = 0;
             int countSalad = 0;
@@ -42,22 +43,25 @@ namespace PP
 
                 if (category == "Exit")
                 {
+                    Console.WriteLine($"Total tables for the day: {tableCounter}\nTotal sales: {countOrders} - {Math.Round(totalPrice, 2)}lv.\nIn categories:" +
+                        $"\n - Salad: {countSalad} - {totalPriceSalad}lv.\n - Soup: {countSoup} - {totalPriceSoup}lv." +
+                        $"\n - Dessert: {countDessert} - {totalPriceDessert}lv.\n - Drinks: {countDrink} - {totalPriceDrink}lv.\n - Main meals: {countMeal} - {totalPriceMeal}");
                     break;
                 }
                 if (category == "Sale!")
                 {
-                    Console.WriteLine($"Total tables for the day: {tableCounter}\nTotal sales: {list.Count} - {totalPrice}\nIn categories:" +
-                        $"\n - Salad: {countSalad} - {priceSalad}\n - Soup: {countSoup} - {priceSoup}" +
-                        $"\n - Dessert: {countDessert} - {priceDessert}\n - Drinks: {countDrink} - {priceDrink}");
+                    Console.WriteLine($"Total tables for the day: {tableCounter}\nTotal sales: {countOrders} - {totalPrice}lv.\nIn categories:" +
+                        $"\n - Salad: {countSalad} - {totalPriceSalad}lv.\n - Soup: {countSoup} - {totalPriceSoup}lv." +
+                        $"\n - Dessert: {countDessert} - {totalPriceDessert}lv.\n - Drinks: {countDrink} - {totalPriceDrink}lv.\n - Main meals: {countMeal} - {totalPriceMeal}");
                     break;
                 }
 
 
-                if (category != "Salad" && category != "Soup" && category != "Dessert" && category != "Drink")
+                if (category != "Salad" && category != "Soup" && category != "Dessert" && category != "Drink" && category != "Meal")
                 {
                     int table = int.Parse(data[0]);
                      
-                    if(tables.IndexOf(table) != -1)
+                    if(tables.IndexOf(table) == -1)
                     {
                         tableCounter++;
                         tables.Add(table);
@@ -65,46 +69,44 @@ namespace PP
                     string name = data[1];
                     string item = data[2];
                     string meal = data[3];
-                    order.Add(name);
-                    order.Add(item);
-                    order.Add(meal);
-
-                    if (list.Contains(name) || list.Contains(item) || list.Contains(meal))
-                    {
-                        
-
-                    } else
-                    {
-                        Console.WriteLine($"We don't have this meal!\nWe have {list[0]}, {list[1]}, {list[2]}");
-                    }
-                    if(name == "Salad" || item == "Salad" || meal == "Salad")
+                 
+                    if((name == "Salad" || item == "Salad" || meal == "Salad") && list.Contains("Salad"))
                     {
                         totalPriceSalad += priceSalad;
                         totalPrice += totalPriceSalad;
                         countSalad++;
-                    } else if(order.Contains("Soup"))
+                        countOrders++;
+                    }
+                    if ((name == "Soup" || item == "Soup" || meal == "Soup") && list.Contains("Soup"))
                     {
                         totalPriceSoup += priceSoup;
                         totalPrice += totalPriceSoup;
                         countSoup++;
+                        countOrders++;
                     }
-                    else if (order.Contains("Dessert"))
+
+                    if ((name == "Dessert" || item == "Dessert" || meal == "Dessert") && list.Contains("Dessert"))
                     {
                         totalPriceDessert += priceDessert;
                         totalPrice += totalPriceDessert;
                         countDessert++;
+                        countOrders++;
                     }
-                    else if (order.Contains("Drink"))
+
+                    if ((name == "Drink" || item == "Drink" || meal == "Drink") && list.Contains("Drink"))
                     {
                         totalPriceDrink += priceDrink;
                         totalPrice += totalPriceDrink;
                         countDrink++;
+                        countOrders++;
                     }
-                    else if (order.Contains("Meal"))
+
+                    if ((name == "Meal" || item == "Meal" || meal == "Meal") && list.Contains("Meal"))
                     {
                         totalPriceMeal += priceMeal;
                         totalPrice += totalPriceMeal;
                         countMeal++;
+                        countOrders++;
                     }
 
                 }
@@ -113,7 +115,6 @@ namespace PP
                     string name = data[1];
                     double quantity = int.Parse(data[2]);
                     double price = int.Parse(data[3]);
-
 
                     if (price <= 0 || price > 100)
                     {
@@ -130,21 +131,24 @@ namespace PP
                         priceMeal = price;
                        
                     }
-                    else if (category == "Dessert")
+
+                    if (category == "Dessert")
                     {
                         quantity *= 3;
-                        priceDessert = price;
+                        priceDessert += price;
                     }
-                    else if (category == "Drink")
+                     if (category == "Drink")
                     {
                         quantity *= 1.5;
-                        priceDrink = price;
-                    } else if (category == "Soup")
+                        priceDrink += price;
+                    }
+                    if (category == "Soup")
                     {
                         priceSoup = price;
-                    } else if(category == "Salad")
+                    }
+                    if (category == "Salad")
                     {
-                        priceSalad = price;
+                        priceSalad += price;
                     }
                     for (int i = 0; i < data.Length; i++)
                     {
