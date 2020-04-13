@@ -1,0 +1,26 @@
+body {
+    background: #000;
+}
+
+.stars {
+    z-index: 0;
+    background-image: url("./assets/stars-3.png");
+    background-repeat: repeat;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-size: 400px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.stars+.stars {
+    background-size: 500px;
+}
+
+.stars+.stars+.stars {
+    background-size: 700px;
+}
