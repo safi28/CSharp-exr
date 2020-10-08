@@ -6,7 +6,6 @@ public class Person
 	public Person(string title)
 	{
         this.title = title;
-
     }
 
     public string Title
